@@ -3,12 +3,60 @@
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
+#define TAM_LINHA 5
+#define TAM_COLUNA 5
 
 int main() {
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    int tabuleiro[TAM_LINHA][TAM_COLUNA];
+
+    for(int i=0; i < TAM_LINHA; i++){
+        for(int j = 0; j <TAM_COLUNA; j++){
+            tabuleiro[i][j] = 0;
+        }
+    }
+
+    int navioHorizontal[2] = {1, 2};
+    int navioVertical[2] = {3, 5};
+
+    int linha = navioHorizontal[0] - 1; //Considerando tabuleiro de 1 até 5 temos. Fazemos o -1 para percorrer os indices de 0 até 4.
+    int coluna = navioHorizontal[1] - 1;
+    
+    if(linha < TAM_LINHA && coluna + 2 < TAM_COLUNA){
+        for(int j = 0; j < 3; j++){
+            tabuleiro[linha][coluna + j] = 3;
+        }
+    }else{
+        printf("Índices fora do limite do tabuleiro!\n");
+        return 1;
+    }
+
+    linha = navioVertical[0] - 1;
+    coluna = navioVertical[1] - 1;
+
+    if(linha +2 < TAM_LINHA && coluna < TAM_COLUNA){
+        for(int i = 0 ; i < 3; i++){
+            if(tabuleiro[i + linha][coluna] == 3){
+                printf("Você não pode sobrepor navios.\n");
+                return 1;
+            }
+            tabuleiro[i + linha][coluna] = 3;
+        }
+    }else{
+        printf("Índices fora do limite do tabuleiro!\n");
+        return 1;
+    }
+
+    for(int i=0; i < TAM_LINHA; i++){
+        for(int j = 0; j <TAM_COLUNA; j++){
+            printf("%d ", tabuleiro[i][j] );
+        }
+        printf("\n");
+    }
+
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
