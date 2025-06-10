@@ -3,8 +3,8 @@
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
-#define TAM_LINHA 5
-#define TAM_COLUNA 5
+#define TAM_LINHA 10
+#define TAM_COLUNA 10
 
 int main() {
     // Nível Novato - Posicionamento dos Navios
@@ -22,7 +22,7 @@ int main() {
     int navioHorizontal[2] = {1, 2};
     int navioVertical[2] = {3, 5};
 
-    int linha = navioHorizontal[0] - 1; //Considerando tabuleiro de 1 até 5 temos. Fazemos o -1 para percorrer os indices de 0 até 4.
+    int linha = navioHorizontal[0] - 1; //Considerando tabuleiro de 1 até 10. Fazemos o -1 para percorrer os indices de 0 até 4.
     int coluna = navioHorizontal[1] - 1;
     
     if(linha < TAM_LINHA && coluna + 2 < TAM_COLUNA){
@@ -50,18 +50,45 @@ int main() {
         return 1;
     }
 
+    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
+    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
+    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
+    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+
+    int navioDiagonal[2] = {7, 7};
+    int navioDiagonalSec[2] = {1, 10};
+
+    linha = navioDiagonal[0] - 1; //Considerando tabuleiro de 1 até 10. Fazemos o -1 para percorrer os indices de 0 até 4.
+    coluna = navioDiagonal[1] - 1;
+
+    for (int i = 0; i < 3; i++) {
+        if(tabuleiro[linha + i][coluna + i] == 3){
+            printf("Você não pode sobrepor navios.\n");
+            return 1;
+        }
+        tabuleiro[linha + i][coluna + i] = 3;
+    }
+
+    linha = navioDiagonalSec[0] - 1; 
+    coluna = navioDiagonalSec[1] - 1;
+
+    for(int i = 0; i < 3; i++){
+        if(tabuleiro[linha][coluna] == 3){
+            printf("Você não pode sobrepor navios.\n");
+            return 1;
+        }
+        tabuleiro[linha][coluna] = 3;
+        linha++;
+        coluna--;
+    }
+
+    //Apresentação da matriz
     for(int i=0; i < TAM_LINHA; i++){
         for(int j = 0; j <TAM_COLUNA; j++){
             printf("%d ", tabuleiro[i][j] );
         }
         printf("\n");
     }
-
-
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
 
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
